@@ -1,0 +1,24 @@
+# Python environments and cache
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+ENV/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Project specific exclusions requested
+remove_comments.py
+remove_ast.py
+*.ipynb
+srs.md
+SRS.md
+
+# Checkpoints and models
+checkpoints/
+*.pth
+*.pt
