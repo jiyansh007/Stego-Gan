@@ -1,31 +1,7 @@
-# ============================================================
-# Stego-GAN: Adversarial Steganography Hunter
-# requirements.txt — Local (CPU) dependencies
-# ============================================================
-#
-# INSTALLATION NOTE:
-#   For CPU-only PyTorch (recommended for local dev without a GPU):
-#     pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
-#     pip install -r requirements.txt
-#
-#   For CUDA 11.8 (if you have an NVIDIA GPU):
-#     pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
-#     pip install -r requirements.txt
-# ============================================================
-
-# --- Deep Learning ---
 torch>=2.0.0
 torchvision>=0.15.0
-
-# --- Streamlit frontend ---
 streamlit>=1.32.0
-
-# --- Image processing ---
 Pillow>=10.0.0
-opencv-python-headless>=4.8.0   # headless = no GUI dependency (safe for all environments)
-
-# --- Numerical computing ---
+opencv-python-headless>=4.8.0
 numpy>=1.24.0
-
-# --- Visualisation (Grad-CAM heatmap overlays) ---
 matplotlib>=3.7.0

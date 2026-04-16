@@ -5,6 +5,13 @@ import struct
 import numpy as np
 from PIL import Image
 import streamlit as st
+
+if __name__ == '__main__':
+    from streamlit.runtime.scriptrunner import get_script_run_ctx
+    if get_script_run_ctx() is None:
+        from streamlit.web import cli as stcli
+        sys.argv = ["streamlit", "run", sys.argv[0]]
+        sys.exit(stcli.main())
 st.set_page_config(page_title='Stego-GAN: Injection Lab', page_icon='💉', layout='wide', initial_sidebar_state='expanded')
 st.markdown('\n<style>\n    @import url(\'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap\');\n\n    html, body, [class*="css"] {\n        font-family: \'Inter\', sans-serif;\n    }\n\n    /* Main container */\n    .main { background-color: #080d14; }\n\n    /* Hero */\n    .hero-title {\n        font-size: 2.6rem;\n        font-weight: 800;\n        background: linear-gradient(135deg, #00f5a0, #00d9f5, #7b2ff7);\n        -webkit-background-clip: text;\n        -webkit-text-fill-color: transparent;\n        margin-bottom: 0.3rem;\n        letter-spacing: -0.5px;\n    }\n    .hero-sub {\n        color: #657b96;\n        font-size: 1.05rem;\n        margin-bottom: 1.5rem;\n    }\n\n    /* Metric cards */\n    .metric-card {\n        background: linear-gradient(135deg, #111827, #1a2235);\n        border: 1px solid #1e2d45;\n        border-radius: 14px;\n        padding: 1.3rem 1.5rem;\n        text-align: center;\n        margin-bottom: 1rem;\n        box-shadow: 0 4px 24px rgba(0,0,0,0.3);\n    }\n    .metric-value {\n        font-size: 2.4rem;\n        font-weight: 700;\n        font-family: \'JetBrains Mono\', monospace;\n    }\n    .metric-label {\n        color: #657b96;\n        font-size: 0.82rem;\n        margin-top: 0.3rem;\n        text-transform: uppercase;\n        letter-spacing: 0.5px;\n    }\n\n    /* Section headers */\n    .section-header {\n        font-size: 1.15rem;\n        font-weight: 700;\n        color: #e2e8f0;\n        border-left: 4px solid #00f5a0;\n        padding-left: 0.8rem;\n        margin: 1.2rem 0 0.6rem 0;\n        letter-spacing: 0.2px;\n    }\n\n    /* Technique badge */\n    .technique-badge {\n        display: inline-block;\n        background: linear-gradient(135deg, #0d1f2d, #13283d);\n        border: 1px solid #00d9f5;\n        border-radius: 6px;\n        padding: 0.2rem 0.7rem;\n        color: #00d9f5;\n        font-family: \'JetBrains Mono\', monospace;\n        font-size: 0.8rem;\n        font-weight: 600;\n    }\n\n    /* Info box */\n    .info-box {\n        background: #0e1724;\n        border: 1px solid #1e2d45;\n        border-left: 3px solid #00f5a0;\n        border-radius: 8px;\n        padding: 1rem 1.2rem;\n        color: #8ba3bf;\n        font-size: 0.875rem;\n        line-height: 1.6;\n    }\n\n    /* Warning / danger */\n    .warn-box {\n        background: #1a1200;\n        border: 1px solid #f59e0b;\n        border-left: 3px solid #f59e0b;\n        border-radius: 8px;\n        padding: 0.8rem 1.2rem;\n        color: #fbbf24;\n        font-size: 0.875rem;\n    }\n\n    /* Code mono */\n    code {\n        font-family: \'JetBrains Mono\', monospace !important;\n        font-size: 0.8rem;\n        background: #0e1724;\n        padding: 0.1rem 0.3rem;\n        border-radius: 4px;\n        color: #00f5a0;\n    }\n\n    /* Streamlit overrides */\n    div[data-testid="stMetric"] {\n        background: #111827;\n        border-radius: 10px;\n        padding: 1rem;\n        border: 1px solid #1e2d45;\n    }\n    .stButton > button {\n        border-radius: 8px;\n        font-weight: 600;\n        letter-spacing: 0.3px;\n        transition: all 0.2s ease;\n    }\n    .stButton > button:hover {\n        transform: translateY(-1px);\n        box-shadow: 0 4px 16px rgba(0, 245, 160, 0.2);\n    }\n    div[data-testid="stFileUploader"] {\n        border: 2px dashed #1e2d45;\n        border-radius: 12px;\n        padding: 1rem;\n        background: #0b1120;\n    }\n</style>\n', unsafe_allow_html=True)
 
@@ -304,4 +311,11 @@ def main():
     st.markdown('---')
     st.caption('Stego-GAN Injection Lab | LSB · Spread Spectrum · Text Embed · DCT-Like | PyTorch · Streamlit')
 if __name__ == '__main__':
-    main()
+    from streamlit.runtime.scriptrunner import get_script_run_ctx
+    if get_script_run_ctx() is not None:
+        main()
+    else:
+        import sys
+        from streamlit.web import cli as stcli
+        sys.argv = ["streamlit", "run", sys.argv[0]]
+        sys.exit(stcli.main())

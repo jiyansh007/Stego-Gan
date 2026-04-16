@@ -22,3 +22,8 @@ SRS.md
 checkpoints/
 *.pth
 *.pt
+
+kaggel_train_unet.ipynb
+raw/
+inject_stego.py
+kaggle_train_unet_fixed.py

@@ -16,6 +16,14 @@ STEGNET_CHECKPOINT = 'checkpoints/stegnet_best.pth'
 UNET_CHECKPOINT = 'checkpoints/unet_best.pth'
 IMAGE_SIZE = 256
 MOCK_USERS = {'admin': {'password': 'admin123', 'role': 'admin'}, 'user': {'password': 'user123', 'role': 'user'}}
+
+if __name__ == '__main__':
+    from streamlit.runtime.scriptrunner import get_script_run_ctx
+    if get_script_run_ctx() is None:
+        from streamlit.web import cli as stcli
+        import sys
+        sys.argv = ["streamlit", "run", sys.argv[0]]
+        sys.exit(stcli.main())
 st.set_page_config(page_title='Stego-GAN: Adversarial Steganography Hunter', page_icon='🔍', layout='wide', initial_sidebar_state='expanded')
 st.markdown('\n<style>\n    /* Main container */\n    .main { background-color: #0e1117; }\n\n    /* Title styling */\n    .hero-title {\n        font-size: 2.4rem;\n        font-weight: 800;\n        background: linear-gradient(90deg, #ff4b4b, #ff8c00, #ffd700);\n        -webkit-background-clip: text;\n        -webkit-text-fill-color: transparent;\n        margin-bottom: 0.2rem;\n    }\n    .hero-sub {\n        color: #8d9db6;\n        font-size: 1.0rem;\n        margin-bottom: 1.5rem;\n    }\n\n    /* Metric cards */\n    .metric-card {\n        background: #1c2333;\n        border: 1px solid #2d3748;\n        border-radius: 12px;\n        padding: 1.2rem 1.5rem;\n        text-align: center;\n        margin-bottom: 1rem;\n    }\n    .metric-value {\n        font-size: 2.5rem;\n        font-weight: 700;\n    }\n    .metric-label {\n        color: #8d9db6;\n        font-size: 0.85rem;\n        margin-top: 0.2rem;\n    }\n\n    /* Status badges */\n    .badge-clean   { color: #22c55e; font-weight: 700; }\n    .badge-stego   { color: #ef4444; font-weight: 700; }\n    .badge-warning { color: #f59e0b; font-weight: 700; }\n\n    /* Section headers */\n    .section-header {\n        font-size: 1.1rem;\n        font-weight: 600;\n        color: #e2e8f0;\n        border-left: 3px solid #ff4b4b;\n        padding-left: 0.75rem;\n        margin: 1rem 0 0.5rem 0;\n    }\n\n    /* Info box */\n    .info-box {\n        background: #1a2035;\n        border: 1px solid #2a3555;\n        border-radius: 8px;\n        padding: 1rem;\n        color: #94a3b8;\n        font-size: 0.875rem;\n    }\n\n    /* Streamlit element overrides */\n    div[data-testid="stMetric"] { background: #1c2333; border-radius: 10px; padding: 1rem; }\n    .stProgress > div > div { background: linear-gradient(90deg, #22c55e, #ef4444); }\n</style>\n', unsafe_allow_html=True)
 
@@ -320,4 +328,11 @@ def main():
         settings = render_sidebar(stegnet_status, unet_status)
         render_detector(stegnet_model, stegnet_status, unet_model, unet_status, settings)
 if __name__ == '__main__':
-    main()
+    from streamlit.runtime.scriptrunner import get_script_run_ctx
+    if get_script_run_ctx() is not None:
+        main()
+    else:
+        import sys
+        from streamlit.web import cli as stcli
+        sys.argv = ["streamlit", "run", sys.argv[0]]
+        sys.exit(stcli.main())
